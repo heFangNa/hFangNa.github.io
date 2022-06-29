@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Eslint-Common mistakes</h1>
+    <h2 id="HomeContainer">Contents</h2>
+    <ul id="DirectoryContainer">
+    </ul>
+
+    <h3>eqeqeq</h3>
+    <p>This rule is aimed at eliminating the type-unsafe equality operators.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        if (x == 42)
+        if ("" == text) { }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        if (x === 42)
+        if ("" === text) { }
+</pre>
+
+
+    <h3>no-alert</h3>
+    <p>This rule is aimed at catching debugging code that should be removed and popup UI elements that should be
+        replaced with
+        less obtrusive, custom UIs. As such, it will warn when it encounters alert, prompt, and confirm function calls
+        which
+        are not shadowed.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        alert(err);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        ECP.Dialog.Alert(err);
+</pre>
+
+
+    <h3>no-console</h3>
+    <p>This rule disallows calls or assignments to methods of the console object.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        console.log();
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        // console.log();
+</pre>
+
+
+    <h3>no-empty</h3>
+    <p>This rule disallows empty block statements. This rule ignores block statements which contain a comment (for
+        example, in
+        an empty catch or finally block of a try statement to indicate that execution should continue regardless of
+        errors).</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        try{
+            existPlanInfoList=JSON.parse(result);
+        } catch (ex) { 
+    
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        try{
+            existPlanInfoList=JSON.parse(result);
+        } catch (ex) {
+            /* empty */ 
+        }
+</pre>
+
+
+    <h3>no-var</h3>
+    <p>This rule is aimed at discouraging the use of var and encouraging the use of const or let instead.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        var i=0;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let i=0;
+        const i=0;
+</pre>
+
+
+    <h3>no-void</h3>
+    <p>This rule aims to eliminate use of void operator.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        let foo = void bar();
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        void foo;
+</pre>
+
+
+    <h3>for-direction</h3>
+    <p>A for loop with a stop condition that can never be reached, such as one with a counter that moves in the wrong
+        direction,
+        will run infinitely. While there are occasions when an infinite loop is intended, the convention is to construct
+        such
+        loops as while loops. More typically, an infinite for loop is a bug.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        for (let i = 10; i >= 0; i++) {
+
+        } 
+        for (let i = 0; i > 10; i++) {
+
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        for (let i = 0; i < 10; i++) { 
+
+        }
+</pre>
+
+
+    <h3>guard-for-in</h3>
+    <p>This rule is aimed at preventing unexpected behavior that could arise from using a for in loop without filtering
+        the results
+        in the loop. As such, it will warn when for in loops do not filter their results with an if statement.
+    </p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+         for (unicodeStr in histogram) {
+             hexEscStr = histogram[unicodeStr];
+             ret = replacer(unicodeStr, hexEscStr, ret);
+             console.log("hexEscStr：" + hexEscStr + "   unicodeStr: " + unicodeStr);
+            }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        Object.keys(histogram).forEach((key) => {
+            hexEscStr = histogram[key]; 
+            unicodeStr = key;
+            ret = replacer(unicodeStr, hexEscStr, ret);
+        });
+</pre>
+
+
+    <h3>no-nested-ternary</h3>
+    <p>The no-nested-ternary rule disallows nested ternary expressions.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        let thing = foo ? bar : baz === qux ? quxx : foobar;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let thing;<br>
+        if (foo) {
+            thing = bar;
+          } else if (baz === qux) {
+            thing = qux;
+          } else {
+            thing = foobar;
+          }
+</pre>
+
+
+    <h3>no-shadow</h3>
+    <p>This rule aims to eliminate shadowed variable declarations.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        const a = 3;
+        function b() {
+            const a = 10;
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        function b() {
+            const a = 10;
+        }
+        const a = 3;
+</pre>
+
+
+    <h3>no-useless-escape</h3>
+    <p>This rule aims to eliminate shadowed variable declarations.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        "\'";
+        '\"';
+        "\#";
+        "\e";
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        "\"";
+        '\'';
+        "\x12";
+        "\u00a9";
+</pre>
+
+
+    <h3>prefer-exponential-operator/no-restricted-properties</h3>
+    <p>This rule disallows calls to Math.pow and suggests using the ** operator instead.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        const foo = Math.pow(2, 8);
+
+        const bar = Math.pow(a, b);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        const foo = 2 ** 8;
+
+        const bar = a ** b;
+</pre>
+
+
+    <h3>no-loop-func</h3>
+    <p>This rule disallows any function within a loop that contains unsafe references (e.g. to modified variables from
+        the outer
+        scope).
+    </p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        for (let i=10; i; i--) {
+            (function() { return i; })();
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let a = function() {};
+        
+        for (let i=10; i; i--) {
+            a();
+        }
+</pre>
+
+
+    <h3>no-continue</h3>
+    <p>This rule disallows continue statements.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        let sum = 0,
+            i;
+        for(i = 0; i < 10; i++) {
+            if(i >= 5) {
+                continue;
+            }
+            a += i;
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let sum = 0,
+            i;
+        for(i = 0; i < 10; i++) {
+            if(i < 5) {
+                a += i;
+            } 
+        }
+</pre>
+
+
+    <h3>new-cap</h3>
+    <p>This rule requires constructor names to begin with a capital letter. Certain built-in identifiers are exempt from
+        this
+        rule. These identifiers are:(Array,Boolean ,Date,Error,Function,Number,Object,RegExp,String,Symbol)
+    </p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        let friend = new person();
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let friend = new Person();
+</pre>
+
+
+    <h3>no-restricted-syntax</h3>
+    <p>This rule disallows specified (that is, user-defined) syntax.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        with (me) {
+            dontMess();
+        }
+        let doSomething = function () {};
+        foo in bar;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        me.dontMess();
+        function doSomething() {};
+        foo instanceof bar;
+</pre>
+
+
+    <h3>block-scoped-var</h3>
+    <p>This rule aims to reduce the usage of variables outside of their binding context and emulate traditional block
+        scope from
+        other languages. This is to help newcomers to the language avoid difficult bugs with variable hoisting.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        function doIf() {
+            if (true) {
+                let build = true;
+            }
+        
+            console.log(build);
+        }
+        
+        function doIfElse() {
+            if (true) {
+                let build = true;
+            } else {
+                let build = false;
+            }
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        function doIf() {
+            let build;
+        
+            if (true) {
+                build = true;
+            }
+        
+            console.log(build);
+        }
+        
+        function doIfElse() {
+            let build;
+        
+            if (true) {
+                build = true;
+            } else {
+                build = false;
+            }
+        }
+</pre>
+
+
+    <h3>no-unreachable</h3>
+    <p>This rule disallows unreachable code after return, throw, continue, and break statements. This rule also flags
+        definitions
+        of instance fields in subclasses whose constructors don't have super() calls.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        function foo() {
+            return true;
+            console.log("done");
+        }
+        
+        function bar() {
+            throw new Error("Oops!");
+            console.log("done");
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        function foo() {
+            return bar();
+            function bar() {
+                return 1;
+            }
+        }
+        
+        function bar() {
+            return x;
+            const x;
+        }        
+</pre>
+
+
+    <h3>no-cond-assign</h3>
+    <p>This rule disallows ambiguous assignment operators in test conditions of if, for, while, and do...while
+        statements.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        let x;
+        if (x = 0) {
+            let b = 1;
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        let x;
+        if (x === 0) {
+            let b = 1;
+        }     
+</pre>
+
+
+    <h3>no-constant-condition</h3>
+    <p>This rule disallows constant expressions in the test condition of:(if, for, while, or do...while statement)</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+        if (false) {
+            doSomethingUnfinished();
+        }
+        
+        for (;-2;) {
+            doSomethingForever();
+        }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+        if (x === 0) {
+            doSomething();
+        }
+        
+        for (;;) {
+            doSomethingForever();
+        }
+</pre>
+    <h3>quote-props</h3>
+    <p>This rule requires quotes around object literal property names.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    const object = {
+        foo: "bar",
+        baz: 42
+        };
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    const object1 = {
+        "foo": "bar",
+        "baz": 42
+        };
+</pre>
+    <h3>prefer-rest-params</h3>
+    <p>This rule is aimed to flag usage of arguments variables.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    dispatch(eventName) {
+        const handlers = this.events;
+        if (eventName && handlers[eventName]) {
+            const args = Array.prototype.slice.call(arguments, 1);
+            for (let i = 0, len = handlers[eventName].length; i < len; i++) {
+                handlers[eventName][i].apply(this, args);
+            }
+        }
+    }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    dispatch(eventName,...args) {
+        const handlers = this.events;
+        if (eventName && handlers[eventName]) {
+            for (let i = 0, len = handlers[eventName].length; i < len; i++) {
+                handlers[eventName][i].apply(this, args);
+            }
+        }
+    }
+</pre>
+    <h3>no-await-in-loop</h3>
+    <p>This rule disallows the use of await within loop bodies.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+async function foo(things) {
+    const results = [];
+    for (const thing of things) {
+    // Bad: each loop iteration is delayed until the entire asynchronous operation completes
+    results.push(await bar(thing));
+    }
+    return baz(results);
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+async function foo(things) {
+    const results = [];
+    for (const thing of things) {
+    // Good: all asynchronous operations are immediately started.
+    results.push(bar(thing));
+  }
+  return baz(await Promise.all(results));
+}
+</pre>
+
+    <h3>no-duplicate-case</h3>
+    <p>This rule disallows duplicate test expressions in case clauses of switch statements.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const a = 1,
+
+switch (a) {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 1:
+        break;
+    default:
+        break;
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const a = 1,
+
+switch (a) {
+    case 1:
+        break;
+    case 2:
+        break;
+    case 3:
+        break;
+    default:
+        break;
+}
+</pre>
+
+    <h3>no -func-assign</h3>
+    <p>This rule disallows reassigning function declarations.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    foo = bar;
+    function foo() {}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    let foo = function () {}
+    foo = bar;
+</pre>
+
+    <h3>no-inner-declarations</h3>
+    <p>This rule requires that function declarations and, optionally, variable declarations be in the root of a program
+        or the
+        body of a function.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+function doSomethingElse() {
+    if (test) {
+        function doAnotherThing() { }
+    }
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function doSomethingElse() {
+    function doAnotherThing() { }
+}
+</pre>
+
+    <h3>no-iterator</h3>
+    <p>This rule is aimed at preventing errors that may arise from using the __iterator__ property, which is not
+        implemented
+        in several browsers. As such, it will warn whenever it encounters the __iterator__ property.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+Foo.prototype.__iterator__ = function() {
+    return new FooIterator(this);
+};
+
+foo.__iterator__ = function () {};
+
+foo["__iterator__"] = function () {};
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const __iterator__ = foo;
+</pre>
+
+    <h3>no-return-await</h3>
+    <p>This rule aims to prevent a likely common performance hazard due to a lack of understanding of the semantics of
+        async
+        function.
+    </p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+async function foo() {
+    return await bar();
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+async function foo() {
+    await bar();
+}
+</pre>
+    <h3>no-unused-vars</h3>
+    <p>This rule is aimed at eliminating unused variables, functions, and function parameters.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+function getY([x, y]) {
+    return y;
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function getY([, y]) {
+    return y;
+}
+</pre>
+
+    <h3>consistent-return</h3>
+    <p>This rule requires return statements to either always or never specify values. This rule ignores function
+        definitions
+        where the name begins with an uppercase letter, because constructors (when invoked with the new operator) return
+        the
+        instantiated object implicitly if they do not return another object explicitly.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+function doSomething(condition) {
+    if (condition) {
+        return true;
+    } else {
+        return;
+    }
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function doSomething(condition) {
+    if (condition) {
+        return true;
+    } else {
+        return false;
+    }
+}
+</pre>
+
+    <h3>no-multi-assign</h3>
+    <p>This rule disallows using multiple assignments within a single statement.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const foo = bar = "baz";
+class Foo {
+    a = b = 10;
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const foo = "baz";
+const bar = "baz";
+class Foo {
+    a = 10;
+    b = 10;
+}
+</pre>
+
+    <h3>no-mixed-operators</h3>
+    <p>Disallows mixes of different operators</p>
+    <p> complex expressions by parentheses clarifies the developer's intention, which makes the code more readable. This
+        rule
+        warns when different operators are used consecutively without parentheses in an expression.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const foo = a && b < 0 || c > 0 || d + 1;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const foo = (a && b < 0) || c > 0 || d + 1;
+const foo = a && (b < 0 || c > 0 || d + 1);
+</pre>
+
+    <h3>comma-dangle</h3>
+    <p>This rule enforces consistent use of trailing commas in object and array literals.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+foo({
+  bar: "baz",
+  qux: "quux",
+});
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+foo({
+    bar: "baz",
+    qux: "quux"
+});
+</pre>
+
+    <h3>no-dupe-args</h3>
+    <p>This rule enforces consistent use of trailing commas in object and array literals.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+foo({
+  bar: "baz",
+  qux: "quux",
+});
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+foo({
+    bar: "baz",
+    qux: "quux"
+});
+</pre>
+
+    <h3>no-dupe-keys</h3>
+    <p>This rule disallows duplicate keys in object literals.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const foo = {
+    bar: "baz",
+    bar: "qux"
+};
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const foo = {
+    bar: "baz",
+    bar1: "qux"
+};
+</pre>
+
+    <h3>no-sparse-arrays</h3>
+    <p>This rule disallows sparse array literals which have “holes” where commas are not preceded by elements. It does
+        not apply
+        to a trailing comma following the last element.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const items = [,];
+const colors = [ "red",, "blue"];
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const items = [];
+const colors = [ "red", "blue"];
+</pre>
+
+    <h3>use-isnan</h3>
+    <p>This rule disallows comparisons to ‘NaN’.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+if (foo == NaN) {
+    // ...
+}
+if (foo != NaN) {
+    // ...
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+if (isNaN(foo)) {
+    // ...
+}
+if (!isNaN(foo)) {
+    // ...
+}
+</pre>
+
+    <h3>array-callback-return</h3>
+    <p>This rule finds callback functions of the following methods, then checks usage of return statement.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const indexMap = myArray.reduce(function(memo, item, index) {
+    memo[item] = index;
+}, {});
+
+const foo = Array.from(nodes, function(node) {
+    if (node.tagName === "DIV") {
+        return true;
+    }
+});
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const indexMap = myArray.reduce(function(memo, item, index) {
+    memo[item] = index;
+    return memo;
+}, {});
+
+const foo = Array.from(nodes, function(node) {
+    if (node.tagName === "DIV") {
+        return true;
+    }
+    return false;
+});
+</pre>
+
+    <h3>class-methods-use-this</h3>
+    <p>This rule is aimed to flag class methods that do not use this.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+class A {
+    foo() {
+        console.log("Hello World");
+    }
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+class A {
+    foo() {
+        this.bar = "Hello World";
+    }
+}
+</pre>
+
+    <h3>curly</h3>
+    <p>This rule is aimed at preventing bugs and increasing code clarity by ensuring that block statements are wrapped
+        in curly
+        braces. It will warn when it encounters blocks that omit curly braces.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    if (foo)
+        doSomething();
+    else
+        doSomethingElse();
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    if(foo)}{
+        doSomething();
+    }else{
+        doSomethingElse();
+    }
+</pre>
+
+    <h3>dot-notation</h3>
+    <p>This rule is aimed at maintaining code consistency and improving code readability by encouraging use of the dot
+        notation
+        style whenever possible. As such, it will warn when it encounters an unnecessary use of square-bracket notation.
+    </p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const x = foo["bar"];
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    const x = foo.bar;
+
+    const x = foo[bar];    // Property name is a variable, square-bracket notation required
+</pre>
+
+    <h3>dot-location</h3>
+    <p>This rule aims to enforce newline consistency in member expressions. This rule prevents the use of mixed newlines
+        around
+        the dot in a member expression.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const foo = object
+.property;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    const foo = object.
+    property;
+    const bar = object.property;
+</pre>
+
+    <h3>no-caller</h3>
+    <p>This rule is aimed at discouraging the use of deprecated and sub-optimal code by disallowing the use of
+        arguments.caller
+        and arguments.callee. As such, it will warn when arguments.caller and arguments.callee are used.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+function foo(n) {
+    if (n <= 0) {
+        return;
+    }
+    
+    arguments.callee(n - 1);
+}
+
+[1,2,3,4,5].map(function(n) {
+    return !(n > 1) ? 1 : arguments.callee(n - 1) * n;
+});
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function foo(n) {
+    if (n <= 0) {
+        return;
+    }
+
+    foo(n - 1);
+}
+
+[1,2,3,4,5].map(function factorial(n) {
+    return !(n > 1) ? 1 : factorial(n - 1) * n;
+});
+</pre>
+
+    <h3>no-div-regex</h3>
+    <p>This is used to disambiguate the division operator to not confuse users.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    function bar() {
+        return /=foo/;
+    }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    function bar() {
+        return /[=]foo/; 
+    }
+</pre>
+
+    <h3>no-else-return</h3>
+    <p>This rule is aimed at highlighting an unnecessary block of code following an if containing a return statement. As
+        such,
+        it will warn when it encounters an else following a chain of ifs, all of them containing a return statement.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    function foo() {
+        if (error) {
+            return 'It failed';
+        } else if (loading) {
+            return "It's still loading";
+        }
+    }
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function foo() {
+    if (error) {
+        return 'It failed';
+    }
+
+    if (loading) {
+        return "It's still loading";
+    }
+}
+</pre>
+
+    <h3>no-empty-pattern</h3>
+    <p>This rule aims to flag any empty patterns in destructured objects and arrays, and as such, will report a problem
+        whenever
+        one is encountered.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const {a: {}} = foo;
+const {a: []} = foo;
+function foo({a: {}}) {}
+function foo({a: []}) {}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const {a = {}} = foo;
+const {a = []} = foo;
+function foo({a = {}}) {}
+function foo({a = []}) {}
+</pre>
+
+    <h3>no-eval</h3>
+    <p>This rule is aimed at preventing potentially dangerous, unnecessary, and slow code by disallowing the use of the
+        eval()
+        function. As such, it will warn whenever the eval() function is used.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const obj = { x: "foo" },
+    key = "x",
+    value = eval("obj." + key);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const obj = { x: "foo" },
+    key = "x",
+    value = obj[key];
+</pre>
+
+    <h3>no-extra-bind</h3>
+    <p>This rule is aimed at avoiding the unnecessary use of bind() and as such will warn whenever an
+        immediately-invoked function
+        expression (IIFE) is using bind() and doesn’t have an appropriate this value. This rule won’t flag usage of
+        bind() that
+        includes function argument binding.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const x = function () {
+    foo();
+}.bind(bar);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const x = function () {
+    this.foo();
+}.bind(bar);
+</pre>
+
+    <h3>no-extra-label</h3>
+    <p>This rule is aimed at eliminating unnecessary labels.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+A: while (a) {
+    break A;
+}
+
+B: for (let i = 0; i < 10; ++i) {
+    break B;
+}
+
+C: switch (a) {
+    case 0:
+        break C;
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+while (a) {
+    break;
+}
+
+for (let i = 0; i < 10; ++i) {
+    break;
+}
+
+switch (a) {
+    case 0:
+        break;
+}
+</pre>
+
+    <h3>no-fallthrough</h3>
+    <p>This rule is aimed at eliminating unintentional fallthrough of one case to the other. As such, it flags any
+        fallthrough
+        scenarios that are not marked by a comment.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+switch(foo) {
+    case 1:
+        doSomething();
+
+    case 2:
+        doSomething();
+}
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+switch(foo) {
+    case 1:
+        doSomething();
+        break;
+
+    case 2:
+        doSomething();
+}
+</pre>
+
+    <h3>no-floating-decimal</h3>
+    <p>This rule is aimed at eliminating floating decimal points and will warn whenever a numeric value has a decimal
+        point but
+        is missing a number either before or after it.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const num = .5;
+const num = 2.;
+const num = -.7;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const num = 0.5;
+const num = 2.0;
+const num = -0.7;
+</pre>
+
+    <h3>no-global-assign</h3>
+    <p>This rule disallows modifications to read-only global variables.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+Object = null;
+undefined = 1;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+var b = 1;
+b = 2;
+</pre>
+
+    <h3>no-implied-eval</h3>
+    <p>This rule aims to eliminate implied eval() through the use of setTimeout(), setInterval() or execScript(). As
+        such, it
+        will warn when either function is used with a string as the first argument.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    setTimeout("ECP.Dialog.Alert('Hi!');", 100);
+
+    setInterval("ECP.Dialog.Alert('Hi!');", 100);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    setTimeout(function() {
+        ECP.Dialog.Alert("Hi!");
+    }, 100);
+
+    setInterval(function() {
+        ECP.Dialog.Alert("Hi!");
+    }, 100);
+</pre>
+
+    <h3>no-multi-spaces</h3>
+    <p>This rule aims to disallow multiple whitespace around logical expressions, conditional expressions, declarations,
+        array
+        elements, object properties, sequences and function parameters.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    var a =  1;
+
+    if(foo   === "bar") {}
+
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    var a = 1;
+
+    if(foo === "bar") {}
+</pre>
+
+    <h3>no-new</h3>
+    <p>This rule is aimed at maintaining consistency and convention by disallowing constructor calls using the new
+        keyword that
+        do not assign the resulting object to a variable.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+    new Thing();
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+    const thing = new Thing();
+
+    Thing();
+</pre>
+
+    <h3>no-new-func</h3>
+    <p>This error is raised to highlight the use of a bad practice. By passing a string to the Function constructor, you
+        are
+        requiring the engine to parse that string much in the way it has to when you call the eval function.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const x = new Function("a", "b", "return a + b");
+const x = Function("a", "b", "return a + b");
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const x = function (a, b) {
+    return a + b;
+};
+</pre>
+
+    <h3>no-new-wrappers</h3>
+    <p>This rule aims to eliminate the use of String, Number, and Boolean with the new operator. As such, it warns
+        whenever it
+        sees new String, new Number, or new Boolean.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const numberObject = new Number(33);
+const booleanObject = new Boolean(false);
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+const text = String(someValue);
+const num = Number(someValue);
+</pre>
+
+
+    <h3>no-redeclare</h3>
+    <p>This rule is aimed at eliminating variables that have multiple declarations in the same scope.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+const a = 3;
+let a = 10;
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+let a = 3;
+
+a = 10;
+
+</pre>
+
+    <h3>no-return-assign</h3>
+    <p>This rule aims to eliminate assignments from return statements. As such, it will warn whenever an assignment is
+        found as part of return.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+function doSomething() {
+    return foo = bar + 2;
+}
+
+function doSomething() {
+    return foo += 2;
+}
+
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+function doSomething() {
+    return foo == bar + 2;
+}
+
+function doSomething() {
+    return foo === bar + 2;
+}
+</pre>
+
+    <h3>no-self-assign</h3>
+    <p>This rule is aimed at eliminating self assignments.</p>
+    <p class="error">Examples of incorrect code</p>
+    <pre class="example">
+foo = foo;
+
+[a, b] = [a, b];
+</pre>
+    <p class="correct">Examples of correct code</p>
+    <pre class="example">
+foo = bar;
+
+[a, b] = [b, a];
+</pre>
+
+    </br>
+    <h2>To be continued ......</h2>
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+h1 {
+    text-align: center;
+    margin: 20px;
+}
+
+h2 {
+    margin: 20px;
+}
+
+h3 {
+    color: lightskyblue;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.BacktoTop {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 40px;
+    margin-bottom: 10px;
+}
+
+p {
+    font-family: monospace;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 15px;
+}
+
+pre {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+li {
+    color: lightskyblue;
+    margin: 5px;
+    font-size: 15px;
+}
+
+.example {
+    background-color: #f6f8fa;
+    padding: 10px;
+    overflow: auto;
+    font-size: 100%;
+    line-height: 1.45;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.error {
+    color: #ff4040;
+}
+
+.correct {
+    color: #6bc877;
+}
